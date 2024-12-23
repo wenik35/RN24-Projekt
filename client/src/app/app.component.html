@@ -1,15 +1,20 @@
 <!--app.component.html-->
 
-<h1 style="color: green; 
-           font-style: italic;">
-    GEEKS FOR GEEKS
+<h1>
+    DATEN
 </h1>
-<h3>
-    Build a Simple Web App with Express & Angular
-</h3>
-<h5>
-    The below message is fetched from the express backend
-</h5>
-<p *ngIf="message">
-    {{ message.message }}
-</p>
+<button (click)="this.postRand();">Zufällige Daten einfügen</button>
+<table>
+    <thead>
+        <tr>
+            <th>Zeitpunkt</th>
+            <th>Messung</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let entry of data">
+            <td>{{entry.timestamp}}</td>
+            <td>{{entry.value}}</td>
+        </tr>
+    </tbody>
+</table>

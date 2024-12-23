@@ -1,6 +1,12 @@
 //server.js
+import { MongoClient } from 'mongodb';
+import express from "express";
 
-const express = require('express');
+var url = "mongodb://localhost:27017/";
+const dbClient = new MongoClient(url);
+const db = dbClient.db('rene24').collection("data");
+//close the client: https://stackoverflow.com/questions/71779732/closing-mongoclient-connection-on-exit-when-using-mongodb-native-driver
+
 const app = express();
 const app_folder = "./client/dist/client/browser";
 
@@ -22,19 +28,29 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express.static(app_folder, options));
+app.use(express.json());
 
-// route for handling requests from the Angular client
-app.get('/api/message', (req, res) => {
-    res.json({ message: 
-            'Hello GEEKS FOR GEEKS Folks from the Express server!' });
-});
+app.get('/api/data/:amount?/:offset?', (req, res) => {
+    db.find({}).toArray().then((result) => {
+        let data = result;
 
-app.get('/api/data/:amount:offset', (req, res) => {
-    //TODO: return data, access params with req.params.[name]
+        if (req.params.offset){
+            data = data.slice(req.params.offset);
+        }
+        if (req.params.amount != 0){
+            data = data.slice(0, req.params.amount);
+        }
+
+        if (data.length > 0) {
+            res.json(data);
+        } else {
+            res.status(404).json('I dont have that');
+        }
+    });
 })
 
 app.post('/api/data', (req, res) => {
-    //TODO: save data, access with req.body
+    db.insertOne(req.body);
 })
 
 // serve angular app
