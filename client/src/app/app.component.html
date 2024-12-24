@@ -1,20 +1,6 @@
 <!--app.component.html-->
 
-<h1>
-    DATEN
-</h1>
-<button (click)="this.postRand();">Zufällige Daten einfügen</button>
-<table>
-    <thead>
-        <tr>
-            <th>Zeitpunkt</th>
-            <th>Messung</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let entry of data">
-            <td>{{entry.timestamp}}</td>
-            <td>{{entry.value}}</td>
-        </tr>
-    </tbody>
-</table>
+<a href="/">Datentabelle</a>
+<a href="/admin">Adminpanel</a>
+
+<router-outlet></router-outlet>

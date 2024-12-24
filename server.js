@@ -31,7 +31,9 @@ app.use(express.static(app_folder, options));
 app.use(express.json());
 
 app.get('/api/data/:amount?/:offset?', (req, res) => {
-    db.find({}).toArray().then((result) => {
+    db.find({})
+    .toArray()
+    .then((result) => {
         let data = result;
 
         if (req.params.offset){
@@ -44,17 +46,21 @@ app.get('/api/data/:amount?/:offset?', (req, res) => {
         if (data.length > 0) {
             res.json(data);
         } else {
-            res.status(404).json('I dont have that');
+            res.status(404).json('No Data available');
         }
     });
 })
 
 app.post('/api/data', (req, res) => {
-    db.insertOne(req.body);
+    db.insertMany(req.body);
+})
+
+app.post('/api/delete', (req, res) => {
+    db.deleteMany({});
 })
 
 // serve angular app
-app.get('', function (req, res) {
+app.all('*', function (req, res) {
     res.status(200).sendFile(`/`, {root: app_folder});
 });
 

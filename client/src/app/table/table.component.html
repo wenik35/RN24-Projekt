@@ -1,0 +1,18 @@
+<h1>
+    DATEN
+</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Zeitpunkt</th>
+            <th>Messung</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let entry of data">
+            <td>{{entry.timestamp}}</td>
+            <td>{{entry.value}}</td>
+        </tr>
+    </tbody>
+</table>

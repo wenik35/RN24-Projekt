@@ -9,13 +9,23 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
     constructor(private http: HttpClient) { }
 
-    postRandomData(){
-        const body = {
-            timestamp: new Date(),
-            value: Math.random()
+    postRandomData(amount: number = 1){
+        const body = [];
+
+        for (let i = 0; i < amount; i++){
+            body.push({
+                timestamp: new Date(),
+                value: Math.random()
+            })
         }
 
         this.http.post("http://localhost:3000/api/data/", body).subscribe(res => {
+            console.log(res);
+        });
+    }
+
+    deleteData(){
+        this.http.post("http://localhost:3000/api/delete/", {}).subscribe(res => {
             console.log(res);
         });
     }
