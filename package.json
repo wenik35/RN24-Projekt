@@ -7,7 +7,8 @@
     "test": "node --import tsx test.ts",
     "build": "cd client && ng b",
     "start": "node server.js",
-    "bs": "npm run build && npm run start"
+    "bs": "npm run build && npm run start",
+    "install": "npm i && cd client && npm i"
   },
   "keywords": [],
   "author": "",
