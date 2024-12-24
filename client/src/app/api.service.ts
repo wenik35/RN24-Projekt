@@ -31,7 +31,10 @@ export class ApiService {
     }
 
     getData(amount?: number, offset?: number) {
-        return this.http.get(
-            `http://localhost:3000/api/data/${amount ?? 0}/${offset ?? 0}`);
+        return this.http.get(`http://localhost:3000/api/data/${amount ?? 0}/${offset ?? 0}`);
+    }
+
+    getStatus(){
+        return this.http.get("http://localhost:3000/api/status");
     }
 }

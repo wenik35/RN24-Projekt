@@ -2,7 +2,7 @@
     DATEN
 </h1>
 
-<table>
+<table *ngIf="data.length > 0">
     <thead>
         <tr>
             <th>Zeitpunkt</th>
@@ -16,3 +16,4 @@
         </tr>
     </tbody>
 </table>
+<h4 *ngIf="data.length == 0" style="color: red;">Keine Daten vorhanden!</h4>

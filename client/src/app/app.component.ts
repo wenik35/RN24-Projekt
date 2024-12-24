@@ -1,18 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { ApiService } from './api.service';
-import { CommonModule } from '@angular/common';
-import { Router, RouterOutlet } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule,
     RouterOutlet,
+    NgIf
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'client';
+
+  public status?: string;
+
+  constructor(private api: ApiService){
+    this.api.getStatus().subscribe(status => {
+      this.status = status.toString();
+    })
+  }
 }

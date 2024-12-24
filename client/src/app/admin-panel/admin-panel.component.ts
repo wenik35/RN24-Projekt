@@ -1,25 +1,31 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../api.service';
 import { RouterState, Router } from '@angular/router';
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-admin-panel',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.scss'
 })
 export class AdminPanelComponent {
+  public amount: number = 1;
+
   constructor(
     private apiService: ApiService,
     private router: Router
   ){}
 
   public postRand(){
-    const amount = Number((document.getElementById("amount") as HTMLInputElement).value);
-    this.apiService.postRandomData(amount);
-
-    this.router.navigate([""]);
+    if (this.amount < 1){
+      window.alert("Scherzkeks ( ° ͜ʖ͡°)╭∩╮");
+    } else {
+      this.apiService.postRandomData(this.amount);
+  
+      this.router.navigate([""]);
+    }
   }
 
   public delete(){

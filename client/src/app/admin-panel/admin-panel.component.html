@@ -3,7 +3,7 @@
 </h1>
 
 <div>
-    <input type="number" id="amount" value="1">
+    <input type="number" min="1" [(ngModel)]="this.amount">
     <button (click)="this.postRand();">Zufällige Datensätze einfügen</button>
 </div>
 <div>

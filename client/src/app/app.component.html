@@ -1,6 +1,10 @@
 <!--app.component.html-->
 
-<a href="/">Datentabelle</a>
-<a href="/admin">Adminpanel</a>
+<div *ngIf="this.status">
+    <a href="/">Datentabelle</a>
+    <a href="/admin">Adminpanel</a>
+    
+    <router-outlet></router-outlet>
+</div>
 
-<router-outlet></router-outlet>
+<h1 *ngIf="!this.status">Keine Verbindung zum Server</h1>

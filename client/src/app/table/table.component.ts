@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { EntryModel } from '../entry-model';
 import { ApiService } from '../api.service';
@@ -7,7 +7,7 @@ import { ApiService } from '../api.service';
   selector: 'app-table',
   standalone: true,
   imports: [
-    NgFor,
+    CommonModule,
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'

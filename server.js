@@ -1,11 +1,10 @@
-//server.js
 import { MongoClient } from 'mongodb';
 import express from "express";
 
+//Setup
 var url = "mongodb://localhost:27017/";
 const dbClient = new MongoClient(url);
 const db = dbClient.db('rene24').collection("data");
-//close the client: https://stackoverflow.com/questions/71779732/closing-mongoclient-connection-on-exit-when-using-mongodb-native-driver
 
 const app = express();
 const app_folder = "./client/dist/client/browser";
@@ -29,6 +28,12 @@ app.use((req, res, next) => {
 });
 app.use(express.static(app_folder, options));
 app.use(express.json());
+
+
+//Endpoints
+app.get("/api/status", (req, res) => {
+    res.status(200).json('Up and running!');
+});
 
 app.get('/api/data/:amount?/:offset?', (req, res) => {
     db.find({})
@@ -66,4 +71,16 @@ app.all('*', function (req, res) {
 
 app.listen(3000, () => {
     console.log('Server listening on port 3000');
+});
+
+
+//Cleanup
+['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
+    'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
+].forEach(function (signal) {
+    process.on(signal, function () {
+        dbClient.close();
+        console.log("EXIT - MongoDB Client disconnected");
+        process.exit(1);
+    });
 });
