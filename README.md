@@ -4,6 +4,7 @@ Benötigt:
 - [MongoDB Community Edition](https://www.mongodb.com/try/download/community)
 - [nodejs](https://nodejs.org/en/download/package-manager)
 
+Um die nachfolgenden Skripte zu nutzen, muss auf Windows die ExecutionPolicy erst auf Bypass gesetzt werden.
 
 Starten:
 - Installieren von packages: npm run install

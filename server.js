@@ -57,11 +57,18 @@ app.get('/api/data/:amount?/:offset?', (req, res) => {
 })
 
 app.post('/api/data', (req, res) => {
-    db.insertMany(req.body);
+    if (req.body[0] != undefined){
+        db.insertMany(req.body);
+    } else {
+        db.insertOne(req.body);
+    }
+    res.status(200);
 })
 
+// muss so implementiert werden, da express irgendwie keine DELETE requests unterstützt, idk
 app.post('/api/delete', (req, res) => {
     db.deleteMany({});
+    res.status(200);
 })
 
 // serve angular app

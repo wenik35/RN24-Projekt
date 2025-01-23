@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
-import { ApiService } from '../api.service';
+import { DataService } from '../../data-helpers/data.service';
 
 @Component({
     selector: 'graph-component',
@@ -9,26 +9,18 @@ import { ApiService } from '../api.service';
     standalone: true,
     imports: [ChartModule]
 })
-export class GraphComponent implements OnInit {
+export class GraphComponent {
     options: any;
 
-    rawData: any[] = [];
+    labels: any[] = [];
 
     graphData: any;
 
     platformId = inject(PLATFORM_ID);
 
-    constructor(private apiService: ApiService, private cd: ChangeDetectorRef) {}
-
-    ngOnInit() {
-      try{
-        this.apiService.getData().subscribe(data => {
-            this.rawData = (data as any[]);
-            this.initChart();
-        });
-      } catch (e) {
-        console.log(e);
-      }
+    constructor(private cd: ChangeDetectorRef, private dataService: DataService) {
+        this.dataService.updateSubject.subscribe(() => this.initChart());
+        this.initChart();
     }
 
     initChart() {
@@ -39,11 +31,11 @@ export class GraphComponent implements OnInit {
             const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
 
             this.graphData = {
-                labels: this.rawData.map(entry => entry.timestamp),
+                labels: this.dataService.dataArray.map(entry => entry.timestamp),
                 datasets: [
                     {
                         label: 'Helligkeit',
-                        data: this.rawData.map(entry => entry.value),
+                        data: this.dataService.dataArray.map(entry => entry.value),
                         fill: false,
                         borderColor: documentStyle.getPropertyValue('--p-cyan-500'),
                         tension: 0.4

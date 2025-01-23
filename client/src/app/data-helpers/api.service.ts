@@ -3,9 +3,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class ApiService {
     constructor(private http: HttpClient) { }
 
@@ -25,7 +23,7 @@ export class ApiService {
     }
 
     deleteData(){
-        this.http.post("http://localhost:3000/api/delete/", {}).subscribe(res => {
+        this.http.post("http://localhost:3000/api/delete", {}).subscribe(res => {
             console.log(res);
         });
     }

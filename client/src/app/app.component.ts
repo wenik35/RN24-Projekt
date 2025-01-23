@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ApiService } from './api.service';
+import { ApiService } from './data-helpers/api.service';
 import { NgIf } from '@angular/common';
 
 @Component({

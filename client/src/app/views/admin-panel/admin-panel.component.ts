@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../api.service';
+import { ApiService } from '../../data-helpers/api.service';
 import { RouterState, Router } from '@angular/router';
 import { FormsModule } from "@angular/forms";
 

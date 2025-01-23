@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { TableComponent } from './table/table.component';
-import { GraphComponent } from './graph/graph.component';
+import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
+import { TableComponent } from './views/table/table.component';
+import { GraphComponent } from './views/graph/graph.component';
 
 export const routes: Routes = [
     {path: "", component: TableComponent},
