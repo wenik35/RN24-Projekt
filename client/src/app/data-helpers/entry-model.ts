@@ -1,4 +1,4 @@
 export interface EntryModel {
-  timestamp: Date;
+  timestamp: string;
   value: number;
 }

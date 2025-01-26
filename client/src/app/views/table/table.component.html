@@ -2,7 +2,7 @@
     DATEN
 </h1>
 
-<table *ngIf="data.length > 0">
+<table *ngIf="dataService.dataArray.length > 0">
     <thead>
         <tr>
             <th>Zeitpunkt</th>
@@ -10,10 +10,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let entry of data">
+        <tr *ngFor="let entry of dataService.dataArray">
             <td>{{entry.timestamp}}</td>
             <td>{{entry.value}}</td>
         </tr>
     </tbody>
 </table>
-<h4 *ngIf="data.length == 0" style="color: red;">Keine Daten vorhanden!</h4>
+<h4 *ngIf="dataService.dataArray.length == 0" style="color: red;">Keine Daten vorhanden!</h4>
